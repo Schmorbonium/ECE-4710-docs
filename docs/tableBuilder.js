@@ -39,7 +39,7 @@ function generateDescription(jsonData){
     var des = "<div>"
     jsonData["fields"].forEach(element => {
         if(element.def){
-            des += `<h3>${element.name}</h3><hr></hr>`
+            des += `<h3>${element.name}</h3>`
             des += `<p>${element.def}</p>`
             if(element.options){
                 des += generateOptionsTable(element.options)
@@ -59,9 +59,9 @@ async function replaceTable(table) {
         }
         const json = await response.json();
         var jsonTable = document.getElementById(table.id);
-        var html = `<h2 class="collapsible">${json.name}</h2><div class="content" style="">
+        var html = `<h2 class="collapsible">${json.name}</h2><div class="content" style=""><hr></hr>
         ${generateTable(json)}
-        ${generateDescription(json)}</div>`
+        ${generateDescription(json)}<hr></hr></div>`
         jsonTable.innerHTML = html;
     } catch(error) {
         console.error("Error loading JSON:", error);        
