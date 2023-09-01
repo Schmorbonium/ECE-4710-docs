@@ -5,6 +5,23 @@
     --textColor:white;
 }
 
+.collapsible {
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  transition: 0.4s;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+
 body {
     background-color: var(--dark);
     color:var(--textColor)
