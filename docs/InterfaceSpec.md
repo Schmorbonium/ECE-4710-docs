@@ -1,24 +1,7 @@
 <link rel="stylesheet" href="MDstyle.css">
 
-InterBoard Header Byte (Words)
-<table>
-    <tr>
-        <th>7</th>
-        <th>6</th>
-        <th>5</th>
-        <th>4</th>
-        <th>3</th>
-        <th>2</th>
-        <th>1</th>
-        <th>0</th>
-    </tr>
-    <tr>
-        <td colspan="4">Attention Bits </td><td colspan="2">Unused</td><td colspan="2">ttl </td>
-    </tr>
-    <tr>
-        <td colspan="3">Data_Len</td><td colspan="5">Message cmd Id</td>
-    </tr>
-</table>
+# InterBoard Header
+<div class="PacketTable" id="IBC_PAcket"> </div>
 
 Computer Interface Header
 <table>
@@ -30,21 +13,24 @@ Computer Interface Header
     </tr>
 </table>
 
+
+
+
 Operations
-|Operation| Value | description|
-|-|-|-|
-|reset          |0x1|
-|SetMem         |0x2|
-|GetMem         |0x3|
-|OpFailed       |0x4|
-|dbSetReg       |0x11|
-|dbGetReg       |0x12|
-|dbGetFlags     |0x13|
-|dbSetPC        |0x14|
-|dbPause        |0x15|
-|dbStep         |0x16|
-|dbNewBP        |0x17|
-|dbStep         |0x18|
+| Operation | Value | description |
+| :-- | :--: | :-- |
+| reset          | 0x1 | test |
+| SetMem         | 0x2 | test |
+| GetMem         | 0x3 | test |
+| OpFailed       | 0x4 | test |
+| dbSetReg       | 0x11 | test |
+| dbGetReg       | 0x12 | test |
+| dbGetFlags     | 0x13 | test |
+| dbSetPC        | 0x14 | test |
+| dbPause        | 0x15 | test |
+| dbStep         | 0x16 | test |
+| dbNewBP        | 0x17 | test |
+| dbStep         | 0x18 | test |
 
 Computer Interface Header
 <table>

@@ -3,6 +3,14 @@
   <title>Markdown Viewer</title>
   <!-- Include Showdown library from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+  <script>    
+    showdown.setOption('tasklists', true);
+    showdown.setOption('simplifiedAutoLink', true);
+    showdown.setOption('ghMentions', true);
+    showdown.setOption('simpleLineBreaks', true);
+    showdown.setOption('tables','true');
+</script>
+<script src="tableBuilder.js"></script>
 </head>
 <body>
   <div id="markdownContent"></div>
@@ -10,7 +18,6 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       var markdownFilePath = "InterfaceSpec.md"; // Relative path to the Markdown file
-
       // Fetch the Markdown file content
       fetch(markdownFilePath)
         .then(response => response.text())
@@ -20,10 +27,12 @@
 
           var markdownContainer = document.getElementById("markdownContent");
           markdownContainer.innerHTML = htmlContent;
+          replaceTables();
         })
         .catch(error => {
           console.error("Error loading Markdown:", error);
         });
+
     });
   </script>
 </body>

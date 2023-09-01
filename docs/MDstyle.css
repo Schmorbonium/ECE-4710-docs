@@ -2,10 +2,12 @@
     --dark:#101010;
     --offDark:#282828;
     --darkContrast:aqua;
+    --textColor:white;
 }
 
 body {
     background-color: var(--dark);
+    color:var(--textColor)
 }
 
 table, th, td {
@@ -13,13 +15,13 @@ table, th, td {
 }
 tr:nth-child(even) {
   background-color: var(--offDark);
-  color: white;
+  color: var(--textColor);
 }
 tr:nth-child(odd) {
   background-color: var(--Dark);
-  color: white;
+  color: var(--textColor);
 }
 th:nth-child(even) {
   background-color: var(--offDark);
-  color: white;
+  color: var(--textColor);
 }

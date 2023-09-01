@@ -1,0 +1,48 @@
+{
+    "name":"IBC Packet",
+    "wordSize":8,
+    "fields":[
+        {
+            "bits":4,
+            "name":"Attention Bits",
+            "def":"Bits used to determine what device should listen to this packet",
+            "options":[
+                {
+                    "value":"xxx1",
+                    "result":"Signal ALU board to listen to this packet"
+                },
+                {
+                    "value":"xx1x",
+                    "result":"Signal Register File to listen to this packet"
+                },
+                {
+                    "value":"x1xx",
+                    "result":"Signal Controller board to listen to this packet"
+                },
+                {
+                    "value":"1xxx",
+                    "result":"Signal Memory interface to listen to this packet"
+                }
+            ]
+        },
+        {
+            "bits":2,
+            "name":"unused"
+        },
+        {
+            "bits":2,
+            "name":"ttl",
+            "def":"Time to Live, This refers to the number of times this packet should be forwarded"
+        },
+        {
+            "bits":3,
+            "name":"Data Length",
+            "def":"The number of Bytes of data to follow"
+        },
+        {
+            "bits":5,
+            "name":"Message Command ID",
+            "def":"This is the ID if the command that is being executed"
+        }
+    ]
+}
