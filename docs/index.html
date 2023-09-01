@@ -2,57 +2,51 @@
 
 <head>
     <title>Docs</title>
-    <link rel="stylesheet" type="text/css" href="collapse.css">
+    <link rel="stylesheet" href="style/MDstyle.css">
     <!-- Include Showdown library from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
-    <script>
-        showdown.setOption('tasklists', true);
-        showdown.setOption('simplifiedAutoLink', true);
-        showdown.setOption('ghMentions', true);
-        showdown.setOption('simpleLineBreaks', true);
-        showdown.setOption('tables', 'true');
-    </script>
-    <script src="tableBuilder.js"></script>
 </head>
 
 <body>
-
-
-    <!-- <button class="collapsible">Click to Toggle</button>
-    <div class="content">
-        <p>This is the content of the collapsible section.</p>
-    </div> -->
-
-    <div id="markdownContent"></div>
-
+    <div class="sidebar">
+        <ul>
+            <li id="Home_Button" onclick="setMD('markdown/InterfaceSpec.md')">InterfaceSpec</a></li>
+            <li id="About_Button" onclick="setMD('markdown/PacketDocs.md')">PacketDocs</a></li>
+            <li id="Services_Button" onclick="setMD('markdown/test.md')">Services</a></li>
+        </ul>
+    </div>
+    
+    <div id="markdownContent" class="mainPage"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="script/markdown.js"></script>
+    <script src="script/packetDoc.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded",function () {
-            var markdownFilePath = "InterfaceSpec.md"; // Relative path to the Markdown file
-            // Fetch the Markdown file content
-            fetch(markdownFilePath)
-                .then(response => response.text())
-                .then(async markdownText => {
-                    var markdownConverter = new showdown.Converter();
-                    var htmlContent = markdownConverter.makeHtml(markdownText);
+        async function makeCollapsable() {
+            const collapsible = document.querySelectorAll('.collapsible');
 
-                    var markdownContainer = document.getElementById("markdownContent");
-                    markdownContainer.innerHTML = htmlContent;
-                    await replaceTables();
+            collapsible.forEach(element => {
+                element.addEventListener('click', function() {
+                    const targetId = element.getAttribute('data-target');
+                    console.log(targetId)
+                    const content = document.getElementById(targetId);
 
-                    const coll = markdownContainer.querySelector('.collapsible');
-                    const content = markdownContainer.querySelector('.content');
-                    coll.addEventListener('click', function () {
-                        console.log("Hello")
-                        if (content.style.display === 'block') {
-                            content.style.display = 'none';
-                        } else {
-                            content.style.display = 'block';
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error("Error loading Markdown:", error);
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                    } else {
+                        content.style.display = 'block';
+                    }
                 });
+            })
+        }
+
+        async function setMD(markDownFile) {
+            await setActiveMarkdown(markDownFile);
+            await InsertPacketDocs();
+            makeCollapsable();
+        }
+
+        document.addEventListener("DOMContentLoaded",function () {
+            setMD("markdown/InterfaceSpec.md")
         });
     </script>
 </body>

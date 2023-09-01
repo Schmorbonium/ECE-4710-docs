@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "c:\\git\\ECE-4710-docs\\docs\\index.html",
+            "file": "${workspaceFolder}/docs/index.html",
             "runtimeArgs": ["--disable-web-security"]
         }
     ]

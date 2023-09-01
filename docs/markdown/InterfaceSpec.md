@@ -1,8 +1,3 @@
-<link rel="stylesheet" href="MDstyle.css">
-
-# InterBoard Header
-<div class="PacketTable" id="IBC_Packet"> </div>
-
 Computer Interface Header
 <table>
     <tr>

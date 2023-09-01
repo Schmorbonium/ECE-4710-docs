@@ -1,3 +1,5 @@
+const packetClass = "PacketDoc"
+
 function generateTable(jsonData) {
     var tableHTML = `<table><thead><tr><th colspan=${jsonData.wordSize}>${jsonData.name}</th></tr>`;
 
@@ -50,30 +52,33 @@ function generateDescription(jsonData){
     return des
 }
 
-async function replaceTable(table) {
-    var jsonFilePath = table.id + '.json'
+async function InsertPacketDoc(packDoc) {
+    var jsonFilePath = `packetDefs/${packDoc.id}.json`
     try {
         var response = await fetch(jsonFilePath)
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         const json = await response.json();
-        var jsonTable = document.getElementById(table.id);
-        var html = `<h2 class="collapsible">${json.name}</h2><div class="content" style=""><hr></hr>
-        ${generateTable(json)}
-        ${generateDescription(json)}<hr></hr></div>`
-        jsonTable.innerHTML = html;
+
+        // var packDoc = document.getElementById(packDoc.id);
+        const contentId = `collapsible-${packDoc.id}`
+        var html = 
+        `<h2 class="collapsible" data-target=${contentId}>${json.name}</h2>
+        <div id="${contentId}" class="content"  style="display: none;">
+            ${generateTable(json)}
+            ${generateDescription(json)}
+        </div>`
+        packDoc.innerHTML = html;
     } catch(error) {
         console.error("Error loading JSON:", error);        
     }
 }
 
-async function replaceTables() {
-
-
-    var tables = document.getElementsByClassName("PacketTable");
-    for (var i = 0; i < tables.length; i++) {
-        var table = tables[i];
-        await replaceTable(table)
+async function InsertPacketDocs() {
+    var packetDocs = document.getElementsByClassName(packetClass);
+    for (var i = 0; i < packetDocs.length; i++) {
+        var packetDoc = packetDocs[i];
+        await InsertPacketDoc(packetDoc)
     }
 }
