@@ -1,0 +1,42 @@
+{
+    "name":"Computer Interface Packet",
+    "wordSize":32,
+    "fields":[
+        {
+            "bits":8,
+            "name":"Operation",
+            "def":" Defines What Operation the packet is requesting",
+            "options":[
+                {
+                    "value":"0x01",
+                    "result":"Sender:Computer  --Instructs MicroController to Reset state to default"
+                },
+                {
+                    "value":"0x02",
+                    "result":"SetMem:Dual  --Sets A given memory Address to a given Value (setting following addresses if provided). Returns error if invalid address outside of purview"
+                },
+                {
+                    "value":"0x03",
+                    "result":"Sender:Dual  --Gets the Memory at a given address and given length Entire range must be valid memory"
+                },
+                {
+                    "value":"0xFF",
+                    "result":"Sender:Dual  --This is the return for a given `command` Returns packet cmd,cmdNumber,status"
+                }
+            ]
+        },
+        {
+            "bits":8,
+            "name":"Data Size",
+            "def":"This is the number of bytes of data to expect following this header"
+        },
+        {
+            "bits":16,
+            "name":"Unused"
+        },
+        {
+            "bits":-1,
+            "name":"Data"
+        }
+    ]
+}
