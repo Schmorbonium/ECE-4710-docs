@@ -1,20 +1,28 @@
 :root {
   --dark: #101010;
-  --offDark: #282828;
+  --offDark: #383838;
+  --midDark: #888888;
   --darkContrast: aqua;
   --textColor: white;
   --sideWidth: 150px;
 }
-
+.highlight {
+  color: var(--darkContrast);
+  border: 1px solid var(--darkContrast);
+  background-color: var(--midDark);
+}
 .collapsible {
   cursor: pointer;
-  padding: 18px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 18px;
   transition: 0.4s;
+}
+
+hr {
+  border: 1px solid var(--darkContrast)
 }
 
 body {
@@ -60,6 +68,7 @@ th:nth-child(even) {
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  color: white;
 }
 
 .sidebar li {
@@ -67,11 +76,15 @@ th:nth-child(even) {
 }
 
 .sidebar a {
-  color: white;
+  cursor: pointer;
   text-decoration: none;
 }
 
 .mainPage {
   margin-left: var(--sideWidth);
   padding: 20px;
+}
+
+.nested {
+  margin-left: 20px;
 }

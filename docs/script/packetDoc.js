@@ -1,4 +1,5 @@
 const packetClass = "PacketDoc"
+var collapsibleCount = 0
 
 function generateTable(jsonData) {
     var tableHTML = `<table><thead><tr><th colspan=${jsonData.wordSize}>${jsonData.name}</th></tr>`;
@@ -35,21 +36,65 @@ function generateOptionsTable(options){
     return table
 }
 
+function subFieldDes(jsonData){
+    des = ""
+    jsonData.subFields.forEach(element => {
+        des += getFieldDes(element)
+    });
+    return des
+}
+
+function Buildtable(Title,colCnt,){
+
+}
+
+function subfieldLayout(jsonData){
+
+    return ""
+}
+
+function subFieldsDoc(jsonData){
+    console.log(`${subfieldLayout(jsonData)}${subFieldDes(jsonData)}`)
+    return `${subfieldLayout(jsonData)}${subFieldDes(jsonData)}`
+}
+
+function getFieldDes(jsonData){
+    var des = ""
+    if(jsonData.def){
+        des += `<h3>${jsonData.name}</h3>`
+        des += `<p class="nested">${jsonData.def}</p>`
+        if(jsonData.options){
+            des += generateOptionsTable(jsonData.options)
+        }
+        if(jsonData.fieldType == "SuperField"){
+            des += subFieldsDoc(jsonData)
+        }
+    }
+    return `<div class="nested">${des}</div>`
+}
 
 
-function generateDescription(jsonData){
+function generateDescriptions(jsonData){
     var des = "<div>"
     jsonData["fields"].forEach(element => {
-        if(element.def){
-            des += `<h3>${element.name}</h3>`
-            des += `<p>${element.def}</p>`
-            if(element.options){
-                des += generateOptionsTable(element.options)
-            }
-        }
+        des += getFieldDes(element)
     });
     des += "</div>"
     return des
+}
+
+function createCollapsibleDiv(label,content) {
+    const div = document.createElement('div')
+    label.classList.add("collapsible")
+    label.addEventListener('click', function() {
+        if (content.style.display === 'block') {
+            content.style.display = 'none';
+        } else {
+            content.style.display = 'block';
+        }
+    })
+    div.append(label,content)
+    return div
 }
 
 async function InsertPacketDoc(packDoc) {
@@ -61,15 +106,24 @@ async function InsertPacketDoc(packDoc) {
         }
         const json = await response.json();
 
+        const label = document.createElement('h2')
+        label.innerText = json.name
+
+        const Docs = document.createElement('div')
+        Docs.classList.add("content","nested")
+        Docs.style.display = 'none';
+        Docs.innerHTML = `${generateTable(json)}${generateDescriptions(json)}`
+        const CPD =  createCollapsibleDiv(label,Docs)
+        packDoc.appendChild(CPD)
         // var packDoc = document.getElementById(packDoc.id);
-        const contentId = `collapsible-${packDoc.id}`
-        var html = 
-        `<h2 class="collapsible" data-target=${contentId}>${json.name}</h2>
-        <div id="${contentId}" class="content"  style="display: none;">
-            ${generateTable(json)}
-            ${generateDescription(json)}
-        </div>`
-        packDoc.innerHTML = html;
+        // const contentId = `collapsible-${packDoc.id}`
+        // var html = 
+        // `<h2 class="collapsible" data-target=${contentId}>${json.name}</h2>
+        // <div id="${contentId}" class="content nested"  style="display: none;">
+        //     ${generateTable(json)}
+        //     ${generateDescriptions(json)}
+        // </div>`
+        // packDoc.innerHTML = html;
     } catch(error) {
         console.error("Error loading JSON:", error);        
     }
