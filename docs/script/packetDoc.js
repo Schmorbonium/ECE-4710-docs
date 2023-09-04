@@ -54,7 +54,7 @@ function subfieldLayout(jsonData){
 }
 
 function subFieldsDoc(jsonData){
-    console.log(`${subfieldLayout(jsonData)}${subFieldDes(jsonData)}`)
+    // console.log(`${subfieldLayout(jsonData)}${subFieldDes(jsonData)}`)
     return `${subfieldLayout(jsonData)}${subFieldDes(jsonData)}`
 }
 
